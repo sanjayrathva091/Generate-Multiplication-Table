@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tables: Generate Any Multiplication Table</title>
+    <style>
+      body {
+        background-color: aliceblue;
+      }
+      main {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+      }
+      /* CSS rule: table container */
+      #table_container {
+        border: 1px dashed orangered;
+        padding: 2rem 0;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+      }
+      #table_container:has(span) span {
+        padding: 0 0.2rem;
+        font-size: xx-large;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <form id="table_form">
+        <div>
+          <label for="table_num">Enter a Number</label>
+          <input type="number" name="table_num" id="table_num" />
+        </div>
+        <div>
+          <button type="submit">Generate</button>
+        </div>
+      </form>
+      <!-- Multiplication Table Goes Here -->
+      <div id="table_container"></div>
+    </main>
+  </body>
+  <script>
+    const form = document.getElementById("table_form");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      console.log("Hello, World!");
+      const num = document.getElementById("table_num").value;
+      const table = document.getElementById("table_container");
+      table.innerHTML = null;
+      for (let i = 1; i <= 10; i++) {
+        const line = document.createElement("div");
+        const a = document.createElement("span");
+        a.innerText = num;
+        const b = document.createElement("span");
+        b.innerText = i;
+        const c = document.createElement("span");
+        c.innerText = num * i;
+        const multiply = document.createElement("span");
+        multiply.innerText = "x";
+        const equal = document.createElement("span");
+        equal.innerText = "=";
+        line.append(a, multiply, b, equal, c);
+        table.append(line);
+      }
+    });
+  </script>
+</html>
