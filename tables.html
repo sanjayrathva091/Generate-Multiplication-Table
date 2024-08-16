@@ -13,10 +13,32 @@
         justify-content: center;
         align-items: center;
       }
+      #table_form div {
+        position: relative;
+      }
+      #table_num + label {
+        background-color: white;
+        padding: 0 3px;
+        border-radius: 4px;
+        position: absolute;
+        top: 5px;
+        left: 2px;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        transform-origin: left top;
+      }
+      #table_num:focus + label {
+        top: -8px;
+        left: 4px;
+        font-size: 0.8rem;
+      }
+      #table_num {
+        font-size: x-large;
+      }
       /* CSS rule: table container */
       #table_container {
-        border: 1px dashed orangered;
-        padding: 2rem 0;
+        box-shadow: 0 0 8px 5px orange;
+        padding: 1.2rem 0;
         display: grid;
         justify-content: center;
         align-items: center;
@@ -32,11 +54,8 @@
     <main>
       <form id="table_form">
         <div>
-          <label for="table_num">Enter a Number</label>
           <input type="number" name="table_num" id="table_num" />
-        </div>
-        <div>
-          <button type="submit">Generate</button>
+          <label for="table_num">Enter a number</label>
         </div>
       </form>
       <!-- Multiplication Table Goes Here -->
@@ -47,24 +66,28 @@
     const form = document.getElementById("table_form");
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      console.log("Hello, World!");
-      const num = document.getElementById("table_num").value;
-      const table = document.getElementById("table_container");
-      table.innerHTML = null;
-      for (let i = 1; i <= 10; i++) {
-        const line = document.createElement("div");
-        const a = document.createElement("span");
-        a.innerText = num;
-        const b = document.createElement("span");
-        b.innerText = i;
-        const c = document.createElement("span");
-        c.innerText = num * i;
-        const multiply = document.createElement("span");
-        multiply.innerText = "x";
-        const equal = document.createElement("span");
-        equal.innerText = "=";
-        line.append(a, multiply, b, equal, c);
-        table.append(line);
+      const num = parseInt(document.getElementById("table_num").value);
+      if (typeof num === "number" && !isNaN(num)) {
+        const table = document.getElementById("table_container");
+        table.innerHTML = null;
+        for (let i = 1; i <= 10; i++) {
+          const line = document.createElement("div");
+          const a = document.createElement("span");
+          a.innerText = num;
+          const b = document.createElement("span");
+          b.innerText = i;
+          const c = document.createElement("span");
+          c.innerText = num * i;
+          const multiply = document.createElement("span");
+          multiply.innerText = "x";
+          const equal = document.createElement("span");
+          equal.innerText = "=";
+          line.append(a, multiply, b, equal, c);
+          table.append(line);
+        }
+      } else {
+        const message = `Invalid number!`;
+        alert(message);
       }
     });
   </script>
